@@ -22,4 +22,6 @@ public interface MemberRepository extends JpaRepository<Member, Integer>{
     List<Member> findMembersByFitnessCenterId(Integer id);
 
     Optional<Member> findByEmailAndPassword(String email, String password);
+
+    Optional<Member> findByEmail(String email);
 }

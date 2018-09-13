@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Date;
@@ -21,16 +22,21 @@ public class EndUser implements User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
-    @Size(min=2, message="Name should have atleast 2 characters")
+    @NotEmpty
+    @Size(min = 2, message = "Name should have atleast 2 characters")
     String name;
 
+    @NotEmpty
+    @Column(unique = true)
     @Email
-            @Column(unique = true)
     String email;
 
+    @NotEmpty
     String password;
 
-    @Size(min=10, message="Name should have atleast 2 characters")
+    @NotEmpty
+    String gender;
+
     String phone;
 
     Date dob;
@@ -80,7 +86,7 @@ public class EndUser implements User {
     }
 
     @Override
-    public Collection<Authority> getAuthorities(){
+    public Collection<Authority> getAuthorities() {
         return role.getAuthorities();
     }
 }

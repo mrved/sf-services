@@ -5,11 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -28,39 +26,38 @@ import javax.sql.DataSource;
 @Import(ServerSecurityConfig.class)
 public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter {
 
-    private final UserDetailsService userDetailsService;
-    private final TokenStore tokenStore;
-    private final DataSource dataSource;
-    private final AuthenticationManager authenticationManager;
+    @Autowired
+    @Qualifier("dataSource")
+    private DataSource dataSource;
 
-    public AuthServerOAuth2Config(UserDetailsService userDetailsService, TokenStore tokenStore, DataSource dataSource,
-                        @Lazy AuthenticationManager authenticationManager) {
-        this.userDetailsService = userDetailsService;
-        this.tokenStore = tokenStore;
-        this.dataSource = dataSource;
-        this.authenticationManager = authenticationManager;
-    }
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private PasswordEncoder oauthClientPasswordEncoder;
+
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public OAuth2AccessDeniedHandler oauthAccessDeniedHandler() {
+        return new OAuth2AccessDeniedHandler();
     }
 
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
-    }
-
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer configurer) throws Exception {
-        configurer.authenticationManager(authenticationManager);
-        configurer.userDetailsService(userDetailsService);
-        configurer.tokenStore(tokenStore);
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
+        oauthServer.tokenKeyAccess("isAuthenticated()").checkTokenAccess("isAuthenticated()").passwordEncoder(oauthClientPasswordEncoder);
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.jdbc(dataSource);
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        endpoints.authenticationManager(authenticationManager).userDetailsService(userDetailsService);
     }
 
 }

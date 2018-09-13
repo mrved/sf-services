@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -100,6 +102,9 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         guru.setDob(new Date());
         guru.setFitnessCenter(frazerTown);
         guru.setRole(generalRole);
+        guru.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
+        guru.setEmail("guru@example.com");
+        guru.setGender("Male");
         userRepository.save(guru);
 
         Trainer alan = new Trainer();
@@ -109,6 +114,9 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         alan.setFitnessCenter(frazerTown);
         alan.setHeadTrainer(guru);
         alan.setRole(generalRole);
+        alan.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
+        alan.setEmail("alan@example.com");
+        alan.setGender("Male");
         userRepository.save(alan);
 
         Trainer rahul = new Trainer();
@@ -118,6 +126,9 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         rahul.setFitnessCenter(frazerTown);
         rahul.setHeadTrainer(guru);
         rahul.setRole(generalRole);
+        rahul.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
+        rahul.setEmail("rahul@example.com");
+        rahul.setGender("Male");
         userRepository.save(rahul);
 
         Member arjun = new Member();
@@ -129,6 +140,9 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         arjun.setHeadTrainer(guru);
         arjun.setFitnessCenter(frazerTown);
         arjun.setRole(generalRole);
+        arjun.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
+        arjun.setEmail("arjun@example.com");
+        arjun.setGender("Male");
 
 
         Member ved = new Member();
@@ -144,7 +158,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         ved.setFitnessCenter(frazerTown);
         ved.setRole(generalRole);
         ved.setEnabled(true);
-
+        ved.setGender("Male");
         userRepository.save(ved);
         userRepository.save(arjun);
 
@@ -165,9 +179,12 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         FrontdeskAdmin frontdeskAdmin = new FrontdeskAdmin();
         frontdeskAdmin.setFitnessCenter(frazerTown);
         frontdeskAdmin.setName("Madar Fuchaa");
-        frontdeskAdminRepository.save(frontdeskAdmin);
         frontdeskAdmin.setRole(generalRole);
+        frontdeskAdmin.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
+        frontdeskAdmin.setEmail("frontdeskAdmin@example.com");
+        frontdeskAdmin.setGender("Male");
 
+        frontdeskAdminRepository.save(frontdeskAdmin);
 
     }
 }
