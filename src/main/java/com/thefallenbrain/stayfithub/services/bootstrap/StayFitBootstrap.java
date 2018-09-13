@@ -73,13 +73,16 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         roleRepository.save(adminRole);
         roleRepository.save(generalRole);
         Goal weightLoss = new Goal();
-        weightLoss.setGoalType("Be Healthier");
+        weightLoss.setName("Be Healthier");
+        weightLoss.setDescription("Eat and train for optimum health");
 
         Goal weightGain = new Goal();
-        weightGain.setGoalType("Loose Weight");
+        weightGain.setName("Loose Weight");
+        weightGain.setDescription("Get leaner and increase stamina");
 
         Goal maintenance = new Goal();
-        maintenance.setGoalType("Gain Weight");
+        maintenance.setName("Gain Weight");
+        maintenance.setDescription("Build muscle strength");
 
         goalRepository.save(weightGain);
         goalRepository.save(weightLoss);

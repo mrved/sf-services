@@ -16,5 +16,6 @@ public class Goal implements Serializable{
     @GeneratedValue
     Integer id;
 
-    String goalType;
+    String name;
+    String description;
 }
