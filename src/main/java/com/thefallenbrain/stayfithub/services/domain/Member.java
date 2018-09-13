@@ -23,4 +23,8 @@ public class Member extends EndUser{
     @OneToOne
     HeadTrainer headTrainer;
 
+    @OneToOne
+    Membership membership;
+
+    Boolean isMembershipActive;
 }

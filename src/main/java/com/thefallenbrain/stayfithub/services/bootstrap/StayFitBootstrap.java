@@ -8,13 +8,9 @@ import com.thefallenbrain.stayfithub.services.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.ContextStartedEvent;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -46,8 +42,23 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
     @Autowired
     private AuthorityRepository authorityRepository;
 
+    @Autowired
+    MembershipOptionRepository membershipOptionRepository;
+
+    @Autowired
+    MembershipRepository membershipRepository;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        MembershipOption gym = new MembershipOption("gym", 2500, 6000, 10000, 15000, 9999);
+        MembershipOption groupx = new MembershipOption("groupx", 3000, 12000, 12000, 17500, 12500);
+        MembershipOption combo = new MembershipOption("combo", 4000, 15000, 15000, 20000, 15000);
+        membershipOptionRepository.save(gym);
+        membershipOptionRepository.save(groupx);
+        membershipOptionRepository.save(combo);
+
+
+
         Role adminRole = new Role();
         adminRole.setRole("ADMIN");
         Role generalRole = new Role();
@@ -146,6 +157,12 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         arjun.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
         arjun.setEmail("arjun@example.com");
         arjun.setGender("Male");
+        Membership membership = new Membership();
+        membership.setStartDate(new Date(-10));
+        membership.setEndDate(new Date(10));
+        membership.setMembershipOption(gym);
+        membershipRepository.save(membership);
+        arjun.setMembership(membership);
 
 
         Member ved = new Member();
@@ -162,6 +179,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         ved.setRole(generalRole);
         ved.setEnabled(true);
         ved.setGender("Male");
+        ved.setMembership(membership);
         userRepository.save(ved);
         userRepository.save(arjun);
 
