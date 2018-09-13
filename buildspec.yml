@@ -1,11 +1,17 @@
-version: 0.1
+version: 0.2
 
 phases:
+  pre_build:
+    commands:
+      - mvn package
   build:
     commands:
-      - echo Build completed on `date`
-      - mvn package
-
+      - mvn war:exploded
+  post_build:
+    commands:
+      - cp -r .ebextensions/ target/ROOT/
+      - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
 artifacts:
+  type: zip
   files:
-    - '**/*'
+    - 'template-export.yml'
