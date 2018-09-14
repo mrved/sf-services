@@ -7,9 +7,4 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FrontdeskAdminRepository extends JpaRepository<FrontdeskAdmin, Integer>{
-    Optional<FrontdeskAdmin> findById(Integer id);
-
-    List<FrontdeskAdmin> findFrontdeskAdminsByFitnessCenterId(Integer id);
-
-    void deleteById(Integer id);
 }

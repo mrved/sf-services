@@ -9,5 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface ExerciseRepository extends JpaRepository<Exercise, Integer> {
-    Optional<Exercise> findById(Integer id);
 }

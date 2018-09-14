@@ -10,18 +10,4 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Integer>{
-
-    Optional<Member> findById(Integer id);
-
-    void deleteById(Integer id);
-
-    List<Member> findMembersByTrainerId(Integer id);
-
-    List<Member> findMembersByHeadTrainerId(Integer id);
-
-    List<Member> findMembersByFitnessCenterId(Integer id);
-
-    Optional<Member> findByEmailAndPassword(String email, String password);
-
-    Optional<Member> findByEmail(String email);
 }

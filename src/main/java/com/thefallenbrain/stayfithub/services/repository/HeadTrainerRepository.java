@@ -9,9 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface HeadTrainerRepository extends JpaRepository<HeadTrainer, Integer> {
-    List<HeadTrainer> findHeadTrainersByFitnessCenterId(Integer id);
-
-    void deleteById(Integer id);
-
-    Optional<HeadTrainer> findById(Integer id);
 }

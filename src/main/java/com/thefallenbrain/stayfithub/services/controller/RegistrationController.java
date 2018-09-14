@@ -76,7 +76,6 @@ public class RegistrationController {
             member.setPassword(newPassword);
             memberRepository.save(member);
             return HttpStatus.OK;
-
         }
         return HttpStatus.FORBIDDEN;
     }
