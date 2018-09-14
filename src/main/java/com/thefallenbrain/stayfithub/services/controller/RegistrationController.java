@@ -1,82 +1,62 @@
 package com.thefallenbrain.stayfithub.services.controller;
 
-import com.thefallenbrain.stayfithub.services.domain.Member;
-import com.thefallenbrain.stayfithub.services.repository.MemberRepository;
-import com.thefallenbrain.stayfithub.services.repository.RoleRepository;
+import ch.qos.logback.core.encoder.EchoEncoder;
+import com.thefallenbrain.stayfithub.services.domain.*;
+import com.thefallenbrain.stayfithub.services.exception.InvalidMemberDetailException;
+import com.thefallenbrain.stayfithub.services.exception.UserNotFoundException;
+import com.thefallenbrain.stayfithub.services.repository.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 public class RegistrationController {
 
     @Autowired
+    EndUserRepository endUserRepository;
+
+    @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    FrontdeskAdminRepository frontdeskAdminRepository;
+
+    @Autowired
+    TrainerRepository trainerRepository;
+
+    @Autowired
+    HeadTrainerRepository headTrainerRepository;
+
     @Autowired
     RoleRepository roleRepository;
-    @PostMapping(value = "/login/application")
-    public Member loginApplication(@RequestParam String email, @RequestParam String password){
-        System.out.println(email + ", " + password);
-        Optional<Member> memberOption = memberRepository.findByEmail(email);
-        if(!memberOption.isPresent()){
-            throw new UsernameNotFoundException("email not found");
+
+
+    @RequestMapping(value = "/login")
+    public EndUser login(@RequestParam String email,
+                         @RequestParam String password)
+            throws UserNotFoundException {
+        try {
+            EndUser endUser = endUserRepository.findByEmailAndPassword(email, password);
+            if(endUser == null)
+                throw new Exception();
+            return endUser;
         }
-        return memberOption.get();
-    }
-
-    @PostMapping(value = "/login/facebook")
-    public Member loginFacebook(@RequestParam String email){
-        return loginApplication(email, "$2a$08$41fiT9hzk5n0/ZN4257qUuYgAZb2GjNsWOhVLMEUHiQ7riy9shKEa");
-    }
-
-    @PostMapping(value = "/signup/application")
-    public Member signup(@RequestBody Member member){
-        member.setRole(roleRepository.findById(2).get());
-        memberRepository.save(member);
-        return loginApplication(member.getEmail(), member.getPassword());
-    }
-
-    @PostMapping(value = "/signup/facebook")
-    public Member signupFacebook(@RequestBody Member member){
-        if(member.getPassword() == null || member.getPassword().isEmpty()){
-            member.setPassword("$2a$08$41fiT9hzk5n0/ZN4257qUuYgAZb2GjNsWOhVLMEUHiQ7riy9shKEa");
-            member.setRole(roleRepository.findById(2).get());
-            member = memberRepository.save(member);
-            if(member != null)
-                return loginApplication(member.getEmail(), member.getPassword());
-            else return null;
+        catch (Exception e){
+            throw new UserNotFoundException();
         }
-        return null;
     }
 
-    @PostMapping(value = "/change/password")
-    public HttpStatus changePassword(@RequestParam String email, @RequestParam String oldPassword, @RequestParam String newPassword){
-       Optional<Member> optionalMember = memberRepository.findByEmailAndPassword(email, oldPassword);
-       if(optionalMember.isPresent()){
-           Member member = optionalMember.get();
-           member.setPassword(newPassword);
-           memberRepository.save(member);
-           return HttpStatus.OK;
-
-       }
-       return HttpStatus.FORBIDDEN;
-    }
-
-    @PostMapping(value = "/forgot/password")
-    public HttpStatus forgotPassword(@RequestParam String email, @RequestParam String newPassword){
-        Optional<Member> optionalMember = memberRepository.findByEmail(email);
-        if(optionalMember.isPresent()){
-            Member member = optionalMember.get();
-            member.setPassword(newPassword);
-            memberRepository.save(member);
-            return HttpStatus.OK;
+    @PostMapping(value = "/signup")
+    public Member signup(@RequestBody Member member)
+            throws InvalidMemberDetailException {
+            member.setRole(roleRepository.findByName("GENERAL"));
+            member.setDesignation("Member");
+        try{
+            return memberRepository.save(member);
+        } catch (Exception e) {
+            throw new InvalidMemberDetailException();
         }
-        return HttpStatus.FORBIDDEN;
     }
+
 }

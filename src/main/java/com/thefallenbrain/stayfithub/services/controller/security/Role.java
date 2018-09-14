@@ -11,14 +11,15 @@ import java.util.Collection;
 @Entity
 @Getter
 @Setter
-public class Role implements Serializable{
+public class Role{
 
     @GeneratedValue
     @Id
-            Integer id;
+    Integer id;
 
-    String role;
+    @Column(unique = true, nullable = false)
+    String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     List<Authority> authorities;
 }

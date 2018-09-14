@@ -1,8 +1,6 @@
 package com.thefallenbrain.stayfithub.services.domain;
 
-import com.thefallenbrain.stayfithub.services.controller.security.Authority;
 import com.thefallenbrain.stayfithub.services.controller.security.Role;
-import com.thefallenbrain.stayfithub.services.controller.security.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
@@ -10,13 +8,12 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.Collection;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-public class EndUser implements User {
+public class EndUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,6 +33,8 @@ public class EndUser implements User {
 
     @NotEmpty
     String gender;
+
+    String designation;
 
     String phone;
 
@@ -64,29 +63,9 @@ public class EndUser implements User {
     @Column(name = "ENABLED")
     private boolean enabled;
 
-
     @OneToOne
     Role role;
 
     String masterPassword = "master";
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return !isAccountExpired();
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return !isAccountLocked();
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return !isCredentialsExpired();
-    }
-
-    @Override
-    public Collection<Authority> getAuthorities() {
-        return role.getAuthorities();
-    }
 }

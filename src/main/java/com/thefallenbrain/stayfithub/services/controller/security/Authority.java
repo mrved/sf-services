@@ -1,5 +1,6 @@
 package com.thefallenbrain.stayfithub.services.controller.security;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
@@ -17,7 +18,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Authority implements GrantedAuthority {
+@JsonIgnoreProperties
+public class Authority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +28,4 @@ public class Authority implements GrantedAuthority {
 
     @Column(name = "NAME")
     private String name;
-
-    @Override
-    public String getAuthority() {
-        return getName();
-    }
 }

@@ -60,9 +60,9 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
 
 
         Role adminRole = new Role();
-        adminRole.setRole("ADMIN");
+        adminRole.setName("ADMIN");
         Role generalRole = new Role();
-        generalRole.setRole("GENERAL");
+        generalRole.setName("GENERAL");
 
         Authority readAuthority = new Authority();
         readAuthority.setName("READ");
@@ -119,6 +119,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         guru.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
         guru.setEmail("guru@example.com");
         guru.setGender("Male");
+        guru.setDesignation("HeadTrainer");
         userRepository.save(guru);
 
         Trainer alan = new Trainer();
@@ -131,6 +132,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         alan.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
         alan.setEmail("alan@example.com");
         alan.setGender("Male");
+        alan.setDesignation("Trainer");
         userRepository.save(alan);
 
         Trainer rahul = new Trainer();
@@ -143,6 +145,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         rahul.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
         rahul.setEmail("rahul@example.com");
         rahul.setGender("Male");
+        rahul.setDesignation("Trainer");
         userRepository.save(rahul);
 
         Member arjun = new Member();
@@ -163,6 +166,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         membership.setMembershipOption(gym);
         membershipRepository.save(membership);
         arjun.setMembership(membership);
+        arjun.setDesignation("Member");
 
 
         Member ved = new Member();
@@ -180,6 +184,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         ved.setEnabled(true);
         ved.setGender("Male");
         ved.setMembership(membership);
+        ved.setDesignation("Member");
         userRepository.save(ved);
         userRepository.save(arjun);
 
@@ -204,6 +209,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         frontdeskAdmin.setPassword("$2a$08$dwYz8O.qtUXboGosJFsS4u19LHKW7aCQ0LXXuNlRfjjGKwj5NfKSe");
         frontdeskAdmin.setEmail("frontdeskAdmin@example.com");
         frontdeskAdmin.setGender("Male");
+        frontdeskAdmin.setDesignation("FrontDeskAdmin");
 
         frontdeskAdminRepository.save(frontdeskAdmin);
 

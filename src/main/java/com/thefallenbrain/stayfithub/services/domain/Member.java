@@ -2,6 +2,7 @@ package com.thefallenbrain.stayfithub.services.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
