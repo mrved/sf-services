@@ -163,7 +163,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         Membership membership = new Membership();
         membership.setStartDate(new Date(-10));
         membership.setEndDate(new Date(10));
-        membership.setMembershipOption(gym);
+//        membership.setMembershipType(gym);
         membershipRepository.save(membership);
         arjun.setMembership(membership);
         arjun.setDesignation("Member");
@@ -190,7 +190,6 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
 
         Exercise exercise = new Exercise();
         exercise.setName("Biceps Curl");
-        exercise.setCaloriesBurn(22);
 
         exerciseRepository.save(exercise);
 
@@ -199,7 +198,6 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         workout.setMember(arjun);
         List<Exercise> exerciseList = new ArrayList<>();
         exerciseList.add(exercise);
-        workout.setExercises(exerciseList);
         workoutRepository.save(workout);
 
         FrontdeskAdmin frontdeskAdmin = new FrontdeskAdmin();

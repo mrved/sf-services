@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -17,9 +18,7 @@ public class Workout {
     @GeneratedValue()
     private Integer id;
 
-    private Date startDate;
-
-    private Date endDate;
+    private Integer duration;
 
     @OneToOne
     private HeadTrainer headTrainer;
@@ -28,6 +27,6 @@ public class Workout {
     private Member member;
 
     @OneToMany
-    private List<Exercise> exercises;
+    private List<WorkoutExercise> workoutExercises;
 
 }

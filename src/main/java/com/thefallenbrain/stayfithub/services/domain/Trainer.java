@@ -25,4 +25,10 @@ public class Trainer extends EndUser{
 
     @OneToOne
     private FitnessCenter fitnessCenter;
+
+    @OneToMany
+    List<Appointment> appointments;
+
+    @OneToMany
+    List<Query> queries;
 }

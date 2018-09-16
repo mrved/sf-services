@@ -1,23 +1,29 @@
 package com.thefallenbrain.stayfithub.services.domain;
 
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class Exercise {
+public class WorkoutPlan {
     @Id
-    @GeneratedValue
-    private Integer id;
-    private String name;
+    Integer id;
 
     @OneToMany
-    List<MuscleGroup> partsTargeted;
+    List<Theme> themes;
+
+    @OneToMany
+    List<MuscleGroup> muscleGroups;
+
+    @OneToMany
+    List<Person> suitableFor;
+
+    @OneToMany
+    List<Activity> activities;
 }
