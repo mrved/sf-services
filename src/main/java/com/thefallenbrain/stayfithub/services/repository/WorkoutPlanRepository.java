@@ -1,9 +1,12 @@
 package com.thefallenbrain.stayfithub.services.repository;
 
 import com.thefallenbrain.stayfithub.services.domain.WorkoutPlan;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.thefallenbrain.stayfithub.services.domain.WorkoutPlanProjection;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface WorkoutPlanRepository extends JpaRepository<WorkoutPlan, Integer>{
+@RepositoryRestResource(excerptProjection = WorkoutPlanProjection.class)
+public interface WorkoutPlanRepository extends CrudRepository<WorkoutPlan, Integer> {
 }

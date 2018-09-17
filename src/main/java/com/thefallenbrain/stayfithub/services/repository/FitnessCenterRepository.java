@@ -1,9 +1,11 @@
 package com.thefallenbrain.stayfithub.services.repository;
 
 import com.thefallenbrain.stayfithub.services.domain.FitnessCenter;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface FitnessCenterRepository extends JpaRepository<FitnessCenter, Integer> {
+@Repository
+public interface FitnessCenterRepository extends CrudRepository<FitnessCenter, Integer> {
 }

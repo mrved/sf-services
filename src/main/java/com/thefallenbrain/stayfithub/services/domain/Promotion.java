@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class Promotion {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     private String code;

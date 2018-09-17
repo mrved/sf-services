@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 public class Payment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     private double amount;

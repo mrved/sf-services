@@ -19,7 +19,7 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     @PreAuthorize("hasAuthority('MEMBER_READ')")
-    public List<Member> getAll() {
+    public Iterable<Member> getAll() {
         return memberRepository.findAll();
     }
 

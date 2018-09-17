@@ -5,20 +5,17 @@ import lombok.Setter;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
 public class MembershipType {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String description;
-    private double price;
+    private Integer price;
     private Long duration;
     @OneToMany
     List<Member> members;

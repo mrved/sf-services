@@ -16,7 +16,7 @@ import java.util.Date;
 public class EndUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
 
     @NotEmpty

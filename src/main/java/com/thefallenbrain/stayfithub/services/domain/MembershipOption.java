@@ -11,7 +11,7 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 public class MembershipOption {
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
     Integer id;
 

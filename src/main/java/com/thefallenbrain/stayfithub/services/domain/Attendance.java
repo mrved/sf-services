@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 public class Attendance {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Past

@@ -4,19 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 @Getter
 @Setter
-public class Query {
+public class Meal {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
-    Integer integer;
+    Integer id;
 
-    @OneToOne
-    Member member;
-
-    @OneToOne
-    Trainer trainer;
+    String name;
 }

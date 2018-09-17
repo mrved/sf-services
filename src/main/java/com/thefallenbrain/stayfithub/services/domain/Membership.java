@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 public class Membership{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
     @OneToOne
     EndUser endUser;

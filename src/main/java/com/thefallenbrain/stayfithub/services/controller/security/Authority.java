@@ -22,7 +22,7 @@ import lombok.Setter;
 public class Authority {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     private Integer id;
 

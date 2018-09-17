@@ -13,7 +13,7 @@ import java.util.Collection;
 @Setter
 public class Role{
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
     Integer id;
 

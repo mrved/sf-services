@@ -5,15 +5,16 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
 @Getter
 @Setter
-public class Goal implements Serializable{
+public class Goal{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
 
     String name;

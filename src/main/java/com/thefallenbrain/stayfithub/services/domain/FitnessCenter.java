@@ -5,10 +5,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 
 @Entity
@@ -16,7 +13,7 @@ import javax.persistence.OneToMany;
 @Setter
 public class FitnessCenter implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
 
     String name;

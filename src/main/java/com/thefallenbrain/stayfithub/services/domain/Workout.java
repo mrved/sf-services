@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Workout {
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     private Integer duration;
@@ -26,7 +26,7 @@ public class Workout {
     @OneToOne
     private Member member;
 
-    @OneToMany
-    private List<WorkoutExercise> workoutExercises;
+    @OneToOne
+    private WorkoutPlan workoutPlan;
 
 }

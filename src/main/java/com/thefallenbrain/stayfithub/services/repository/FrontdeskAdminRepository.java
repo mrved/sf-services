@@ -1,11 +1,13 @@
 package com.thefallenbrain.stayfithub.services.repository;
 
 import com.thefallenbrain.stayfithub.services.domain.FrontdeskAdmin;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface FrontdeskAdminRepository extends JpaRepository<FrontdeskAdmin, Integer>{
+@Repository
+public interface FrontdeskAdminRepository extends CrudRepository<FrontdeskAdmin, Integer>{
     List<FrontdeskAdmin> findFrontdeskAdminsByFitnessCenterId(Integer id);
 }

@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class HubForm {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
 
     String name;

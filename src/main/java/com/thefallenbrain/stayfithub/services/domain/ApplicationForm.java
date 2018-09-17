@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class ApplicationForm {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
 
     String firstName;

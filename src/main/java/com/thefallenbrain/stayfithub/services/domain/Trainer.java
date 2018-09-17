@@ -29,6 +29,6 @@ public class Trainer extends EndUser{
     @OneToMany
     List<Appointment> appointments;
 
-    @OneToMany
-    List<Query> queries;
+//    @OneToMany
+//    List<Query> queries;
 }

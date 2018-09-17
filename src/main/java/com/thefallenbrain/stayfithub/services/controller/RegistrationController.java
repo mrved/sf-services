@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @Slf4j
 public class RegistrationController {
@@ -33,14 +35,15 @@ public class RegistrationController {
 
 
     @RequestMapping(value = "/login")
-    public EndUser login(@RequestParam String email,
-                         @RequestParam String password)
+    public void login(@RequestParam String email,
+                         @RequestParam String password, HttpServletResponse response)
             throws UserNotFoundException {
         try {
             EndUser endUser = endUserRepository.findByEmailAndPassword(email, password);
             if(endUser == null)
                 throw new Exception();
-            return endUser;
+            String s = "/members/" + (endUser.getId());
+            response.sendRedirect(s);
         }
         catch (Exception e){
             throw new UserNotFoundException();
@@ -48,12 +51,13 @@ public class RegistrationController {
     }
 
     @PostMapping(value = "/signup")
-    public Member signup(@RequestBody Member member)
+    public Member signup(@RequestBody Member member, HttpServletResponse response)
             throws InvalidMemberDetailException {
             member.setRole(roleRepository.findByName("GENERAL"));
             member.setDesignation("Member");
         try{
-            return memberRepository.save(member);
+            memberRepository.save(member);
+            return member;
         } catch (Exception e) {
             throw new InvalidMemberDetailException();
         }
