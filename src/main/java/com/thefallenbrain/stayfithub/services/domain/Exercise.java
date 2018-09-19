@@ -1,6 +1,7 @@
 package com.thefallenbrain.stayfithub.services.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public class Exercise {
     private Integer id;
     private String name;
 
-    @OneToMany
-    List<MuscleGroup> partsTargeted;
+
+    @Column(name = "parts_targetted")
+    @ManyToMany
+    Set<MuscleGroup> partsTargeted;
 }

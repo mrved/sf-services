@@ -21,10 +21,6 @@ public class ExercisesController {
     @PutMapping(value = "exercises/{id}")
     @ResponseBody
     void update(@PathVariable Integer id, @RequestBody Exercise exercise){
-//        Optional<Exercise> exercise1 = exerciseRepository.findById(id);
-//        if(exercise1.isPresent()){
-//           exerciseRepository.deleteById(id);
-//        }
         exercise.setId(id);
         exerciseRepository.save(exercise);
     }

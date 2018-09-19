@@ -6,11 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.DayOfWeek;
 
 @Entity
 @Getter
 @Setter
-@JsonPropertyOrder(value = {"id", "exercise", "repititions", "sets"})
 public class WorkoutExercise {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
@@ -25,4 +25,6 @@ public class WorkoutExercise {
     Integer repititions;
 
     Integer sets;
+
+    String dayOfWeek;
 }

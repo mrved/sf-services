@@ -14,7 +14,4 @@ public class MuscleGroup {
     Integer id;
 
     String name;
-
-    @ManyToOne
-    Exercise exercise;
 }

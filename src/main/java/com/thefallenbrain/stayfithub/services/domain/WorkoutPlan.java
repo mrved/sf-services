@@ -20,17 +20,17 @@ public class WorkoutPlan {
 
     String description;
 
-    @OneToMany
+    @ManyToMany
     List<Theme> themes;
 
-    @OneToMany
+    @ManyToMany
     List<MuscleGroup> muscleGroups;
 
     String suitableFor;
 
-    @OneToMany
+    @ManyToMany
     List<Activity> activities;
 
-    @OneToMany
+    @ManyToMany
     List<WorkoutExercise> workoutExercises;
 }

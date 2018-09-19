@@ -11,10 +11,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEvent>{
@@ -388,7 +385,7 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
 
         Exercise shadowBoxing = new Exercise();
         shadowBoxing.setName("Shadow Boxing");
-        shadowBoxing.setPartsTargeted(muscleGroups);
+        shadowBoxing.setPartsTargeted(new HashSet<>(muscleGroups));
         exerciseRepository.save(shadowBoxing);
 
 //        Exercise deepSquats = new Exercise();

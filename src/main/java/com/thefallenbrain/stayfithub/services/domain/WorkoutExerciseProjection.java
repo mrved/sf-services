@@ -10,4 +10,5 @@ public interface WorkoutExerciseProjection {
     ExerciseProjection getExercise();
     Integer getRepititions();
     Integer getSets();
+    String getDayOfWeek();
 }

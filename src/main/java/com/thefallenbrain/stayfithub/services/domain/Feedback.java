@@ -2,6 +2,7 @@ package com.thefallenbrain.stayfithub.services.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,13 +15,19 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
+    Integer rating;
     private String description;
+
+    @HandleBeforeCreate
+    void setDate(){
+        timestamp = new Date();
+    }
 
     private Date timestamp;
 
-    @OneToOne
-    private Member givenBy;
+    String whatDidYouLike;
 
-    @OneToOne
-    private FitnessCenter fitnessCenter;
+    String whatToImprove;
+
+    String recommendation;
 }

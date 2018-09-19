@@ -4,12 +4,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.springframework.lang.Nullable;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -22,6 +21,7 @@ public class Member extends EndUser{
     @OneToOne
     FitnessCenter fitnessCenter;
 
+    @Nullable
     @OneToOne
     Trainer trainer;
 
@@ -33,13 +33,24 @@ public class Member extends EndUser{
 
     Boolean isMembershipActive;
 
-    @OneToOne
+    @ManyToOne
     WorkoutPlan workoutPlan;
 
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.EAGER)
     List<Appointment> appointments;
 
-//    @OneToMany
-//    List<Query> queries;
+    String smokingStatus;
+
+    String alcoholStatus;
+
+    String activityStatus;
+
+    double waistSize;
+    double hipSize;
+
+    String location;
+
+    String aboutYourself;
 
 }

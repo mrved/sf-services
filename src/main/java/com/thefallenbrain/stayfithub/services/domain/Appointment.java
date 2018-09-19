@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -15,13 +14,12 @@ public class Appointment {
     @Id
     Integer id;
 
-    Date startDate;
+    Date date;
+    String timeSlot;
 
-    Integer duration;
+    String timeAttended;
 
-    @OneToOne
-    Member member;
+    @ManyToOne
+    FitnessCenter fitnessCenter;
 
-    @OneToOne
-    Trainer trainer;
 }
