@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.metamodel.Type;
 
 @Configuration
-@ComponentScan("com.thefallenbrain.stayfithub")
 public class RestConfiguration extends RepositoryRestConfigurerAdapter {
 
     @Autowired

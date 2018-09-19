@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.DispatcherServlet;
 
 @SpringBootApplication
-@ComponentScan("com.thefallenbrain.stayfithub")
+@ComponentScan("com.thefallenbrain.stayfithub.services")
 public class Application extends SpringBootServletInitializer {
 
     @Override

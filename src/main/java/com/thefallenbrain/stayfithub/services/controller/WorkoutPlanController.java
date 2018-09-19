@@ -2,8 +2,10 @@ package com.thefallenbrain.stayfithub.services.controller;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.thefallenbrain.stayfithub.services.domain.Exercise;
+import com.thefallenbrain.stayfithub.services.domain.Member;
 import com.thefallenbrain.stayfithub.services.domain.WorkoutExercise;
 import com.thefallenbrain.stayfithub.services.domain.WorkoutPlan;
+import com.thefallenbrain.stayfithub.services.repository.MemberRepository;
 import com.thefallenbrain.stayfithub.services.repository.WorkoutExerciseRepository;
 import com.thefallenbrain.stayfithub.services.repository.WorkoutPlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class WorkoutPlanController {
     @Autowired
     WorkoutExerciseRepository workoutExerciseRepository;
 
+    @Autowired
+    MemberRepository memberRepository;
+
     @PutMapping(value = "workoutPlans/{id}")
     @ResponseBody
     void updateWorkoutPlan(@PathVariable Integer id, @RequestBody WorkoutPlan workoutPlan){
@@ -48,9 +53,11 @@ public class WorkoutPlanController {
         workoutPlanRepository.save(workoutPlan);
     }
 
-    @PutMapping(value = "members/workoutPlans")
+    @PutMapping(value = "members/{id}/workoutPlans")
     @ResponseBody
     void setWorkoutPlan(@PathVariable Integer id, @RequestBody WorkoutPlan workoutPlan){
-
+        Member member = memberRepository.findById(id).get();
+        member.setWorkoutPlan(workoutPlan);
+        memberRepository.save(member);
     }
 }
