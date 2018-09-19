@@ -1,6 +1,7 @@
 package com.thefallenbrain.stayfithub.services.config.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.metamodel.Type;
 
 @Configuration
+@ComponentScan("com.thefallenbrain.stayfithub")
 public class RestConfiguration extends RepositoryRestConfigurerAdapter {
 
     @Autowired
