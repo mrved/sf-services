@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.lang.Nullable;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -52,5 +53,8 @@ public class Member extends EndUser{
     String location;
 
     String aboutYourself;
+
+    Date workoutPlanStartDate;
+    Date workoutPlanEndDate;
 
 }
