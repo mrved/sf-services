@@ -17,4 +17,6 @@ public interface MemberRepository extends CrudRepository<Member, Integer>{
     List<Member> findMembersByFitnessCenterId(Integer id);
 
     List<Member> findMembersByHeadTrainerId(Integer id);
+
+    Member findByEmail(String email);
 }

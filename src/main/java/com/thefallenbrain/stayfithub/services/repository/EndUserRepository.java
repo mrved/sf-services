@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface EndUserRepository extends CrudRepository<EndUser, Integer>{
     EndUser findByEmailAndPassword(String email, String password);
+
+    EndUser findByEmail(String email);
 }

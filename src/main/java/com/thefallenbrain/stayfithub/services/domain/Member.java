@@ -8,6 +8,7 @@ import org.springframework.lang.Nullable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.*;
 
@@ -49,11 +50,13 @@ public class Member extends EndUser{
 
     double waistSize;
     double hipSize;
+    int magicPin;
 
     String location;
 
     String aboutYourself;
 
+    Boolean isEmailVerified = false;
     Date workoutPlanStartDate;
     Date workoutPlanEndDate;
 
