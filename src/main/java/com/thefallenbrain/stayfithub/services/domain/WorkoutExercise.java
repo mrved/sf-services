@@ -2,7 +2,6 @@ package com.thefallenbrain.stayfithub.services.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Proxy;
