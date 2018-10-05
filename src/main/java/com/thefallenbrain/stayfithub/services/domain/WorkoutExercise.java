@@ -2,8 +2,11 @@ package com.thefallenbrain.stayfithub.services.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -16,11 +19,9 @@ public class WorkoutExercise {
     @Id
     Integer id;
 
-    @OneToOne
-    Exercise exercise;
 
-    @OneToOne
-    Workout workout;
+
+    Integer workoutPlanId;
 
     Integer repititions;
 
@@ -29,4 +30,6 @@ public class WorkoutExercise {
     String dayOfWeek;
 
     String status;
+    String exerciseName;
+    Integer exId;
 }

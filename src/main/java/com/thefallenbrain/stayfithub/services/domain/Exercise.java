@@ -6,6 +6,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @Setter
 
 @JsonPropertyOrder(value = {"id", "name", "partsTargeted"})
+@Proxy(lazy=false)
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

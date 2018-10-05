@@ -399,10 +399,8 @@ public class StayFitBootstrap implements ApplicationListener<ContextRefreshedEve
         themeRepository.save(theme);
 
         WorkoutExercise workoutExercise = new WorkoutExercise();
-        workoutExercise.setExercise(shadowBoxing);
         workoutExercise.setRepititions(10);
         workoutExercise.setSets(3);
-        workoutExercise.setWorkout(workout);
 
         workoutExerciseRepository.save(workoutExercise);
 
