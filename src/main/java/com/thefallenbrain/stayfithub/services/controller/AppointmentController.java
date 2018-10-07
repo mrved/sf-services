@@ -49,7 +49,6 @@ public class AppointmentController {
         Member member = memberRepository.findById(id).get();
         for (Appointment appointment : member.getAppointments()) {
             if (appointment.getDate().getDate() == new Date().getDate()) {
-                if(appointment.getTimeAttended() != null && !appointment.getTimeAttended().isEmpty())
                     list.add(appointment);
             }
         }
@@ -62,9 +61,8 @@ public class AppointmentController {
         List<Appointment> list = new ArrayList<>();
         Member member = memberRepository.findById(id).get();
         for (Appointment appointment : member.getAppointments()) {
-//            if (appointment.getDate().getDate() == new Date().getDate()) {
+            if(appointment.getTimeAttended() == null || appointment.getTimeAttended().isEmpty())
                 list.add(appointment);
-//            }
         }
         return list;
     }
