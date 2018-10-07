@@ -81,7 +81,10 @@ public class RegistrationController {
 
             Random rnd = new Random();
             int magicPin = 100000 + rnd.nextInt(900000);
-            if (type.isPresent() && !type.get().equalsIgnoreCase("facebook")) {
+            if (type.isPresent() ) {
+                member.setPassword("master");
+            }
+            else {
                 member.setMagicPin(magicPin);
                 SimpleMailMessage message = new SimpleMailMessage();
                 try {
@@ -93,9 +96,6 @@ public class RegistrationController {
                     System.out.println(e.getMessage());
                     System.out.println("Unable to send mail");
                 }
-            }
-            else if(type.isPresent()) {
-                member.setPassword("master");
             }
             memberRepository.save(member);
             String s = "/members/" + (member.getId());
