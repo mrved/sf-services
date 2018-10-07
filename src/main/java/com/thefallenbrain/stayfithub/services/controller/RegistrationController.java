@@ -3,6 +3,7 @@ package com.thefallenbrain.stayfithub.services.controller;
 import ch.qos.logback.core.encoder.EchoEncoder;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.thefallenbrain.stayfithub.services.domain.*;
+import com.thefallenbrain.stayfithub.services.exception.EmailNotRegisteredException;
 import com.thefallenbrain.stayfithub.services.exception.InvalidMemberDetailException;
 import com.thefallenbrain.stayfithub.services.exception.UserNotFoundException;
 import com.thefallenbrain.stayfithub.services.repository.*;
@@ -11,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.Email;
 import java.util.Optional;
 import java.util.Random;
 
@@ -91,7 +94,7 @@ public class RegistrationController {
                     System.out.println("Unable to send mail");
                 }
             }
-            else {
+            else if(type.isPresent()) {
                 member.setPassword("master");
             }
             memberRepository.save(member);
@@ -103,52 +106,65 @@ public class RegistrationController {
     }
 
     @GetMapping(value = "/forgot/{email}")
-    public void forgot(@PathVariable String email, HttpServletResponse response) {
-        Member member = memberRepository.findByEmail(email);
-        Random rnd = new Random();
-        int magicPin = 100000 + rnd.nextInt(900000);
-        member.setMagicPin(magicPin);
-        SimpleMailMessage message = new SimpleMailMessage();
+    public void forgot(@PathVariable String email, HttpServletResponse response)
+    throws EmailNotRegisteredException{
         try {
-            message.setTo(member.getEmail());
-            message.setText(
-                    "Use this pin " + magicPin + " to reset your password.");
-            emailSender.send(message);
-        } catch (MailException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Unable to send mail");
-        }
-        memberRepository.save(member);
-        String s = "/members/" + (member.getId());
-        try {
-            response.sendRedirect(s);
-        } catch (Exception e) {
+            Member member = memberRepository.findByEmail(email);
+            Random rnd = new Random();
+            int magicPin = 100000 + rnd.nextInt(900000);
+            member.setMagicPin(magicPin);
+            SimpleMailMessage message = new SimpleMailMessage();
+            try {
+                message.setSubject("Stayfithub | Reset Password | Do not reply");
+                message.setTo(member.getEmail());
+                message.setText(
+                        "Use this pin " + magicPin + " to reset your password.");
+                emailSender.send(message);
+            } catch (MailException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Unable to send mail");
+            }
+            memberRepository.save(member);
+            String s = "/members/" + (member.getId());
+            try {
+                response.sendRedirect(s);
+            } catch (Exception e) {
 
+            }
+        }
+        catch (Exception e){
+            throw new EmailNotRegisteredException();
         }
     }
 
     @GetMapping(value = "/resend/{email}")
-    public void resend(@PathVariable String email, HttpServletResponse response) {
-        Member member = memberRepository.findByEmail(email);
-        Random rnd = new Random();
-        int magicPin = 100000 + rnd.nextInt(900000);
-        member.setMagicPin(magicPin);
-        SimpleMailMessage message = new SimpleMailMessage();
+    public void resend(@PathVariable String email, HttpServletResponse response)
+            throws EmailNotRegisteredException{
         try {
-            message.setTo(member.getEmail());
-            message.setText(
-                    "Use this pin " + magicPin);
-            emailSender.send(message);
-        } catch (MailException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Unable to send mail");
-        }
-        memberRepository.save(member);
-        String s = "/members/" + (member.getId());
-        try {
-            response.sendRedirect(s);
-        } catch (Exception e) {
+            Member member = memberRepository.findByEmail(email);
+            Random rnd = new Random();
+            int magicPin = 100000 + rnd.nextInt(900000);
+            member.setMagicPin(magicPin);
+            SimpleMailMessage message = new SimpleMailMessage();
+            try {
+                message.setSubject("Stayfithub | Pin | Do not reply");
+                message.setTo(member.getEmail());
+                message.setText(
+                        "Use this pin " + magicPin);
+                emailSender.send(message);
+            } catch (MailException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Unable to send mail");
+            }
+            memberRepository.save(member);
+            String s = "/members/" + (member.getId());
+            try {
+                response.sendRedirect(s);
+            } catch (Exception e) {
 
+            }
+        }catch (Exception e){
+            throw new EmailNotRegisteredException();
         }
     }
 

@@ -54,4 +54,17 @@ public class AppointmentController {
         }
         return list;
     }
+
+    @GetMapping(value = "members/{id}/appointments")
+    @ResponseBody
+    List<Appointment> getAllAppointments(@PathVariable Integer id) {
+        List<Appointment> list = new ArrayList<>();
+        Member member = memberRepository.findById(id).get();
+        for (Appointment appointment : member.getAppointments()) {
+//            if (appointment.getDate().getDate() == new Date().getDate()) {
+                list.add(appointment);
+//            }
+        }
+        return list;
+    }
 }
