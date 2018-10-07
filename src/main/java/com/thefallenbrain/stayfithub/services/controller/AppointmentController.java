@@ -32,7 +32,7 @@ public class AppointmentController {
         Member member = memberRepository.findById(id).get();
         List<Appointment> appointmentList = member.getAppointments();
         for (Appointment appointment1 : appointmentList) {
-            if (appointment1.getDate().compareTo(appointment.getDate()) == 0) {
+            if (appointment1.getDate().getDate() == appointment.getDate().getDate()) {
                 throw new AppointmentAlreadyBookedException();
             }
         }
