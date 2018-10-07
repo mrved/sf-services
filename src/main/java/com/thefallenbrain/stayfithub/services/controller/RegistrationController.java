@@ -88,6 +88,7 @@ public class RegistrationController {
                 member.setMagicPin(magicPin);
                 SimpleMailMessage message = new SimpleMailMessage();
                 try {
+                    message.setSubject("Stayfithub | Signup");
                     message.setTo(member.getEmail());
                     message.setText("Welcome to Stayfit, Have a fit life!\n" +
                             "Use this pin " + magicPin + " to verify your account.");
