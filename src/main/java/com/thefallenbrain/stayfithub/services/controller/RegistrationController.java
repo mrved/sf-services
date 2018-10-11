@@ -75,9 +75,9 @@ public class RegistrationController {
                        @PathVariable Optional<String> type,
                        HttpServletResponse response)
             throws InvalidMemberDetailException {
-        member.setRole(roleRepository.findByName("GENERAL"));
-        member.setDesignation("Member");
         try {
+            member.setRole(roleRepository.findByName("GENERAL"));
+            member.setDesignation("Member");
 
             Random rnd = new Random();
             int magicPin = 100000 + rnd.nextInt(900000);
@@ -86,6 +86,7 @@ public class RegistrationController {
             }
             else {
                 member.setMagicPin(magicPin);
+                memberRepository.save(member);
                 SimpleMailMessage message = new SimpleMailMessage();
                 try {
                     message.setSubject("Stayfithub | Signup");
@@ -98,7 +99,6 @@ public class RegistrationController {
                     System.out.println("Unable to send mail");
                 }
             }
-            memberRepository.save(member);
             String s = "/members/" + (member.getId());
             response.sendRedirect(s);
         } catch (Exception e) {
@@ -114,6 +114,7 @@ public class RegistrationController {
             Random rnd = new Random();
             int magicPin = 100000 + rnd.nextInt(900000);
             member.setMagicPin(magicPin);
+            memberRepository.save(member);
             SimpleMailMessage message = new SimpleMailMessage();
             try {
                 message.setSubject("Stayfithub | Reset Password | Do not reply");
@@ -125,7 +126,6 @@ public class RegistrationController {
                 System.out.println(e.getMessage());
                 System.out.println("Unable to send mail");
             }
-            memberRepository.save(member);
             String s = "/members/" + (member.getId());
             try {
                 response.sendRedirect(s);
