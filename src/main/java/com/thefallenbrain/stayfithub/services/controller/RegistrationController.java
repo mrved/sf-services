@@ -83,10 +83,11 @@ public class RegistrationController {
             int magicPin = 100000 + rnd.nextInt(900000);
             if (type.isPresent() ) {
                 member.setPassword("master");
+                memberRepository.save(member);
             }
             else {
-                member.setMagicPin(magicPin);
                 memberRepository.save(member);
+                member.setMagicPin(magicPin);
                 SimpleMailMessage message = new SimpleMailMessage();
                 try {
                     message.setSubject("Stayfithub | Signup");
