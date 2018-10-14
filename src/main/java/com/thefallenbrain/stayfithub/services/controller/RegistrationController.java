@@ -83,6 +83,7 @@ public class RegistrationController {
             int magicPin = 100000 + rnd.nextInt(900000);
             if (type.isPresent() ) {
                 member.setPassword("master");
+                member.setIsEmailVerified(true);
                 memberRepository.save(member);
             }
             else {
