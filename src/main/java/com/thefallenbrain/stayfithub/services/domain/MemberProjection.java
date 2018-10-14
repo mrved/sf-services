@@ -16,7 +16,7 @@ public interface MemberProjection {
 
 	 MembershipProjection getMembership();
 
-	 Boolean getMembershipActive();
+	 Boolean getIsMembershipActive();
 
 	 String getSmokingStatus();
 
@@ -34,7 +34,7 @@ public interface MemberProjection {
 
 	 String getAboutYourself();
 
-	 Boolean getEmailVerified();
+	 Boolean getIsEmailVerified();
 
 	 Date getWorkoutPlanStartDate();
 
