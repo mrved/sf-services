@@ -1,6 +1,7 @@
 package com.thefallenbrain.stayfithub.services.repository;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.thefallenbrain.stayfithub.services.domain.FitnessCenter;
 import com.thefallenbrain.stayfithub.services.domain.Trainer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -14,5 +15,5 @@ import java.util.Optional;
 public interface TrainerRepository extends CrudRepository<Trainer, Integer>{
     List<Trainer> findTrainersByHeadTrainerId(Integer id);
 
-    List<Trainer> findTrainersByFitnessCenterId(Integer id);
+    List<Trainer> findTrainersByFitnessCenter(FitnessCenter fitnessCenter);
 }

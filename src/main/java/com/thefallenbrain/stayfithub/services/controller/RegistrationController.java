@@ -9,6 +9,7 @@ import com.thefallenbrain.stayfithub.services.exception.UserNotFoundException;
 import com.thefallenbrain.stayfithub.services.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -41,6 +44,9 @@ public class RegistrationController {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    FitnessCenterRepository fitnessCenterRepository;
 
 
     @RequestMapping(value = "/login")
@@ -171,4 +177,36 @@ public class RegistrationController {
         }
     }
 
+    @GetMapping(value = "fitnessCenters/{id}/members")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Member> getMembersByFitnessCenter(@PathVariable Integer id){
+        try {
+            return memberRepository.findMembersByFitnessCenter(fitnessCenterRepository.findById(id).get());
+        }
+        catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
+
+    @GetMapping(value = "fitnessCenters/{id}/trainers")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Trainer> getTrainersByFitnessCenter(@PathVariable Integer id){
+        try {
+            return trainerRepository.findTrainersByFitnessCenter(fitnessCenterRepository.findById(id).get());
+        }
+        catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
+
+    @GetMapping(value = "fitnessCenters/{id}/headTrainers")
+    @ResponseStatus(HttpStatus.OK)
+    public List<HeadTrainer> getHeadTrainersByFitnessCenter(@PathVariable Integer id){
+        try {
+            return headTrainerRepository.findHeadTrainersByFitnessCenter(fitnessCenterRepository.findById(id).get());
+        }
+        catch (Exception e){
+            return new ArrayList<>();
+        }
+    }
 }
