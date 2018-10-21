@@ -4,7 +4,7 @@ import org.springframework.data.rest.core.config.Projection;
 
 import java.util.Date;
 
-@Projection(name = "flat", types = Member.class)
+//@Projection(name = "flat", types = Member.class)
 public interface MemberProjection {
 	 Integer getId();
 	 Goal getGoal();

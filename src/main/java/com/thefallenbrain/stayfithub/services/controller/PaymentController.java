@@ -1,17 +1,12 @@
 package com.thefallenbrain.stayfithub.services.controller;
 
-import com.thefallenbrain.stayfithub.services.domain.Member;
-import com.thefallenbrain.stayfithub.services.domain.Membership;
-import com.thefallenbrain.stayfithub.services.domain.MembershipType;
-import com.thefallenbrain.stayfithub.services.domain.Payment;
-import com.thefallenbrain.stayfithub.services.repository.MemberRepository;
-import com.thefallenbrain.stayfithub.services.repository.MembershipRepository;
-import com.thefallenbrain.stayfithub.services.repository.MembershipTypeRepository;
-import com.thefallenbrain.stayfithub.services.repository.PaymentRepository;
+import com.thefallenbrain.stayfithub.services.domain.*;
+import com.thefallenbrain.stayfithub.services.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +20,8 @@ public class PaymentController {
     MembershipRepository membershipRepository;
     @Autowired
     MembershipTypeRepository membershipTypeRepository;
+    @Autowired
+    FitnessCenterRepository fitnessCenterRepository;
 
     @Autowired
     PaymentRepository paymentRepository;
@@ -33,10 +30,12 @@ public class PaymentController {
     @ResponseStatus(HttpStatus.OK)
     void subscription(@RequestParam Integer memberId,
                  @RequestParam Integer membershipTypeId,
-                 @RequestParam String paymentId){
+                 @RequestParam String paymentId,
+                      @RequestParam Integer fitnessCenterId){
         Member member = memberRepository.findById(memberId).get();
 
         MembershipType membershipType = membershipTypeRepository.findById(membershipTypeId).get();
+        FitnessCenter fitnessCenter = fitnessCenterRepository.findById(fitnessCenterId).get();
         // setting up membership
 		Payment payment = new Payment();
         Membership membership = new Membership();
@@ -57,6 +56,7 @@ public class PaymentController {
         payment.setMemberShipType(membershipType.getDescription());
         payment.setMemberName(member.getName());
         paymentRepository.save(payment);
+        member.setFitnessCenter(fitnessCenter);
         memberRepository.save(member);
     }
 

@@ -89,12 +89,13 @@ public class RegistrationController {
             int magicPin = 100000 + rnd.nextInt(900000);
             if (type.isPresent() ) {
                 member.setPassword("master");
+                member.setMagicPin(magicPin);
                 member.setIsEmailVerified(true);
                 memberRepository.save(member);
             }
             else {
-                memberRepository.save(member);
                 member.setMagicPin(magicPin);
+                memberRepository.save(member);
                 SimpleMailMessage message = new SimpleMailMessage();
                 try {
                     message.setSubject("Stayfithub | Signup");
@@ -209,4 +210,6 @@ public class RegistrationController {
             return new ArrayList<>();
         }
     }
+
+
 }

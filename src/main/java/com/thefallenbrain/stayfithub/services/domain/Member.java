@@ -20,6 +20,8 @@ public class Member extends EndUser{
     @OneToOne
     Goal goal;
 
+    Integer goalID;
+
     @OneToOne
     FitnessCenter fitnessCenter;
 

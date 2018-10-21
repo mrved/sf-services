@@ -4,7 +4,7 @@ import org.springframework.data.rest.core.config.Projection;
 
 import java.util.Date;
 
-@Projection(name = "flat", types = HeadTrainer.class)
+//@Projection(name = "flat", types = HeadTrainer.class)
 public interface HeadTrainerProjection {
 	FitnessCenterProjection getFitnessCenter();
 	Integer getId();

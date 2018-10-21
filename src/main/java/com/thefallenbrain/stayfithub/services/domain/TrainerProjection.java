@@ -4,7 +4,7 @@ import org.springframework.data.rest.core.config.Projection;
 
 import java.util.Date;
 
-@Projection(name = "flat", types = Trainer.class)
+//@Projection(name = "flat", types = Trainer.class)
 public interface TrainerProjection {
 	Date getDoj();
 
