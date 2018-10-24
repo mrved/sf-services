@@ -26,8 +26,13 @@ public class MembersController {
 	void updateMember(@PathVariable Integer id,
 					  @RequestBody Member member){
 
-		member = memberRepository.findById(id).get();
+		Member member = memberRepository.findById(id).get();
 		try {
+			member.setName(newMember.getName());
+			member.setEmail(newMember.getEmail());
+			member.setGender(newMember.getGender());
+			member.setPhone(newMember.getPhone());
+			member.setDob(newMember.getDob());
 			member.setGoal(goalRepository.findById(member.getGoalID()).get());
 		}catch (Exception e){
 
