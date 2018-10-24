@@ -26,7 +26,7 @@ public class MembersController {
 	void updateMember(@PathVariable Integer id,
 					  @RequestBody Member member){
 
-		member.setId(id);
+		member = memberRepository.findById(id).get();
 		try {
 			member.setGoal(goalRepository.findById(member.getGoalID()).get());
 		}catch (Exception e){
